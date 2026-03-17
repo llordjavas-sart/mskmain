@@ -35,6 +35,10 @@ const corsOptions = {
       "http://localhost:5173",
       "http://localhost:8080",
       "https://shop-go-main-1.vercel.app",
+      "https://mskfam.co.za",
+      "https://www.mskfam.co.za",
+      "https://mskfamonline.netlify.app",
+      "https://mskmain.vercel.app",
     ];
 
     // Check if origin matches allowed patterns

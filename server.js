@@ -36,6 +36,7 @@ app.use(
       "http://localhost:5173",
       "http://localhost:8080",
       "https://shop-go-main-1.vercel.app",
+      "https://mskfam.co.za",
       /\.vercel\.app$/,
       /\.netlify\.app$/,
     ],
@@ -101,7 +102,7 @@ app.post(
             await db
               .collection("orders")
               .doc(orderId.replace("#", ""))
-              .set(orderData);
+              .set(orderData, { merge: true });
             console.log("✅ Order saved to Firebase:", orderId);
           } catch (err) {
             console.error("Failed to save order from webhook:", err);
@@ -214,7 +215,11 @@ app.post("/api/payments/checkout", async (req, res) => {
       console.error("❌ Yoco API error:", data);
       return res.status(yocoResponse.status).json({
         success: false,
-        error: data.errorMessage || data.message || "Checkout creation failed",
+        error:
+          data.errorMessage ||
+          data.error ||
+          data.message ||
+          "Checkout creation failed",
         details: data,
       });
     }
